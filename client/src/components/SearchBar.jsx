@@ -20,6 +20,7 @@ const SearchBar = ({ onSearch, loading }) => {
     >
       <input
         type="text"
+        disabled={loading}
         placeholder="Enter GitHub username"
         value={username}
         onChange={(event) =>
@@ -29,11 +30,11 @@ const SearchBar = ({ onSearch, loading }) => {
       />
 
       <button
-        type="submit"
         disabled={loading}
+        type="submit"
         className="px-4 py-2 rounded border"
       >
-        Search
+        {loading ? "Searching..." : "Search"}
       </button>
     </form>
   );

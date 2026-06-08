@@ -4,20 +4,31 @@ import { searchUser } from "./services/githubApi";
 import ProfileCard from "./components/ProfileCard";
 import RepoList from "./components/RepoList";
 import SortDropdown from "./components/SortDropdown";
+import ErrorMessage from "./components/ErrorMessage";
 
 function App() {
   const [userData, setUserData] = useState(null);
   const [sortBy, setSortBy] = useState("updatedAt");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSearch = async (username) => {
     try {
-      const data = await searchUser(username);
+      setLoading(true);
+      setError("");
 
-      console.log(data);
+      const data = await searchUser(username);
 
       setUserData(data);
     } catch (error) {
-      console.error(error);
+      setUserData(null);
+
+      setError(
+        error.response?.data?.message ||
+        "Something went wrong"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,8 +61,12 @@ function App() {
 
       <SearchBar
         onSearch={handleSearch}
-        loading={false}
+        loading={loading}
       />
+
+      {error && (
+        <ErrorMessage message={error} />
+      )}
 
       {userData && (
         <>
