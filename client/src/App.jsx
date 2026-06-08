@@ -5,6 +5,8 @@ import ProfileCard from "./components/ProfileCard";
 import RepoList from "./components/RepoList";
 import SortDropdown from "./components/SortDropdown";
 import ErrorMessage from "./components/ErrorMessage";
+import toast from "react-hot-toast";
+
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -20,10 +22,16 @@ function App() {
       const data = await searchUser(username);
 
       setUserData(data);
+      toast.success("User loaded successfully");
     } catch (error) {
       setUserData(null);
 
       setError(
+        error.response?.data?.message ||
+        "Something went wrong"
+      );
+      
+      toast.error(
         error.response?.data?.message ||
         "Something went wrong"
       );
