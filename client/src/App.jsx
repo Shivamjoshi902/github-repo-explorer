@@ -6,6 +6,7 @@ import RepoList from "./components/RepoList";
 import SortDropdown from "./components/SortDropdown";
 import ErrorMessage from "./components/ErrorMessage";
 import toast from "react-hot-toast";
+import RecentSearches from "./components/RecentSearches";
 
 
 function App() {
@@ -13,7 +14,15 @@ function App() {
   const [sortBy, setSortBy] = useState("updatedAt");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [recentSearches, setRecentSearches] =
+    useState(() => {
+      const saved = localStorage.getItem(
+        "recentSearches"
+      );
 
+      return saved ? JSON.parse(saved) : [];
+    });
+  
   const handleSearch = async (username) => {
     try {
       setLoading(true);
@@ -22,6 +31,21 @@ function App() {
       const data = await searchUser(username);
 
       setUserData(data);
+
+      const updatedSearches = [
+        username,
+        ...recentSearches.filter(
+          (item) => item !== username
+        ),
+      ].slice(0, 5);
+
+      setRecentSearches(updatedSearches);
+
+      localStorage.setItem(
+        "recentSearches",
+        JSON.stringify(updatedSearches)
+      );
+
       toast.success("User loaded successfully");
     } catch (error) {
       setUserData(null);
@@ -30,7 +54,7 @@ function App() {
         error.response?.data?.message ||
         "Something went wrong"
       );
-      
+
       toast.error(
         error.response?.data?.message ||
         "Something went wrong"
@@ -70,6 +94,11 @@ function App() {
       <SearchBar
         onSearch={handleSearch}
         loading={loading}
+      />
+
+      <RecentSearches
+        searches={recentSearches}
+        onSearch={handleSearch}
       />
 
       {error && (
