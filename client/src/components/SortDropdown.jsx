@@ -1,8 +1,8 @@
 const SortDropdown = ({ sortBy, onSortChange }) => {
   return (
-    <div className="mb-4">
-      <label className="mr-2 font-medium">
-        Sort By:
+    <div className="flex items-center gap-3 mt-6 mb-4">
+      <label className="font-semibold">
+        Sort Repositories:
       </label>
 
       <select
@@ -10,7 +10,7 @@ const SortDropdown = ({ sortBy, onSortChange }) => {
         onChange={(event) =>
           onSortChange(event.target.value)
         }
-        className="border rounded px-3 py-2"
+        className="border rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="updatedAt">
           Last Updated

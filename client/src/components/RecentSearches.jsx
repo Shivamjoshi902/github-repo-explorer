@@ -7,8 +7,8 @@ const RecentSearches = ({
   }
 
   return (
-    <div className="mt-4">
-      <h2 className="font-semibold mb-2">
+    <div className="mt-6">
+      <h2 className="font-semibold text-lg mb-3">
         Recent Searches
       </h2>
 
@@ -17,7 +17,16 @@ const RecentSearches = ({
           <button
             key={username}
             onClick={() => onSearch(username)}
-            className="px-3 py-1 border rounded"
+            className="
+              px-4
+              py-2
+              rounded-full
+              border
+              bg-gray-50
+              hover:bg-blue-50
+              hover:border-blue-400
+              transition
+            "
           >
             {username}
           </button>

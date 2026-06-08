@@ -16,23 +16,42 @@ const SearchBar = ({ onSearch, loading }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex gap-2"
+      className="flex flex-col sm:flex-row gap-3 mt-6"
     >
       <input
         type="text"
         disabled={loading}
-        placeholder="Enter GitHub username"
+        placeholder="Enter GitHub username..."
         value={username}
         onChange={(event) =>
           setUsername(event.target.value)
         }
-        className="border rounded px-4 py-2 flex-1"
+        className="
+          flex-1
+          px-4
+          py-3
+          border
+          rounded-xl
+          shadow-sm
+          focus:outline-none
+          focus:ring-2
+          focus:ring-blue-500
+        "
       />
 
       <button
-        disabled={loading}
         type="submit"
-        className="px-4 py-2 rounded border"
+        disabled={loading}
+        className="
+          px-6
+          py-3
+          bg-blue-600
+          text-white
+          rounded-xl
+          hover:bg-blue-700
+          disabled:bg-gray-400
+          transition
+        "
       >
         {loading ? "Searching..." : "Search"}
       </button>

@@ -24,6 +24,7 @@ function App() {
     });
   
   const handleSearch = async (username) => {
+    if (loading) return;
     try {
       setLoading(true);
       setError("");
@@ -46,6 +47,8 @@ function App() {
         JSON.stringify(updatedSearches)
       );
 
+      setError("");
+      
       toast.success("User loaded successfully");
     } catch (error) {
       setUserData(null);
@@ -86,37 +89,58 @@ function App() {
   : [];
 
   return (
-    <div className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold mb-8">
-        GitHub Repo Explorer
-      </h1>
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-6xl mx-auto p-6">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            GitHub Repo Explorer
+          </h1>
 
-      <SearchBar
-        onSearch={handleSearch}
-        loading={loading}
-      />
+          <p className="text-gray-600 mt-2">
+            Explore GitHub profiles and repositories instantly.
+          </p>
+        </div>
 
-      <RecentSearches
-        searches={recentSearches}
-        onSearch={handleSearch}
-      />
+        <SearchBar
+          onSearch={handleSearch}
+          loading={loading}
+        />
 
-      {error && (
-        <ErrorMessage message={error} />
-      )}
+        <RecentSearches
+          searches={recentSearches}
+          onSearch={handleSearch}
+        />
 
-      {userData && (
-        <>
-          <ProfileCard user={userData.user} />
+        {error && (
+          <ErrorMessage message={error} />
+        )}
 
-          <SortDropdown
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
+        {userData && (
+          <>
+            <ProfileCard user={userData.user} />
 
-          <RepoList repos={sortedRepos} />
-        </>
-      )}
+            <SortDropdown
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+            />
+
+            <RepoList repos={sortedRepos} />
+          </>
+        )}
+
+        {!userData && !error && (
+    <div className="text-center mt-16">
+      <h2 className="text-2xl font-semibold">
+        Search GitHub Users
+      </h2>
+
+      <p className="text-gray-500 mt-2">
+        Enter a username to explore
+        repositories and profile details.
+      </p>
+    </div>
+  )}
+      </div>
     </div>
   );
 }
