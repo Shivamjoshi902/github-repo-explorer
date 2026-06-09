@@ -6,7 +6,7 @@ A full-stack GitHub Repository Explorer built with React, Node.js, and Express t
 
 ### Frontend
 
-github-repo-explorer-amber-one.vercel.app
+https://github-repo-explorer-amber-one.vercel.app
 
 ### Backend API
 
@@ -143,24 +143,59 @@ In-Memory Cache
 github-repo-explorer
 │
 ├── client
-│   ├── src
-│   │   ├── components
-│   │   ├── services
-│   │   ├── App.jsx
-│   │   └── main.jsx
 │   │
-│   └── package.json
+│   ├── public
+│   │
+│   ├── src
+│   │   │
+│   │   ├── components
+│   │   │   ├── ErrorMessage.jsx
+│   │   │   ├── ProfileCard.jsx
+│   │   │   ├── RecentSearches.jsx
+│   │   │   ├── RepoCard.jsx
+│   │   │   ├── RepoList.jsx
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── SortDropdown.jsx
+│   │   │
+│   │   ├── services
+│   │   │   └── githubApi.js
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── server
+│   │
 │   ├── src
+│   │   │
 │   │   ├── cache
+│   │   │   └── githubCache.js
+│   │   │
 │   │   ├── controllers
+│   │   │   └── githubController.js
+│   │   │
 │   │   ├── routes
+│   │   │   └── githubRoutes.js
+│   │   │
 │   │   ├── services
+│   │   │   └── githubService.js
+│   │   │
+│   │   ├── middleware
+│   │   ├── utils
 │   │   └── app.js
 │   │
+│   ├── .env
 │   ├── server.js
 │   └── package.json
+│
+├── screenshots
+│   ├── home.png
+│   ├── search-result.png
+│   ├── expanded-repo.png
+│   └── load-more.png
 │
 └── README.md
 ```
