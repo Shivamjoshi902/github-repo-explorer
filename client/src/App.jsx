@@ -22,7 +22,8 @@ function App() {
 
       return saved ? JSON.parse(saved) : [];
     });
-  
+  const [visibleRepos, setVisibleRepos] = useState(6);
+
   const handleSearch = async (username) => {
     if (loading) return;
     try {
@@ -32,6 +33,8 @@ function App() {
       const data = await searchUser(username);
 
       setUserData(data);
+
+      setVisibleRepos(6);
 
       const updatedSearches = [
         username,
@@ -124,7 +127,30 @@ function App() {
               onSortChange={setSortBy}
             />
 
-            <RepoList repos={sortedRepos} />
+            <RepoList
+              repos={sortedRepos.slice(0, visibleRepos)}
+            />
+
+            {visibleRepos < sortedRepos.length && (
+              <div className="text-center mt-6">
+                <button
+                  onClick={() =>
+                    setVisibleRepos(
+                      (prev) => prev + 6
+                    )
+                  }
+                  className="
+                    px-6 py-3
+                    rounded-lg
+                    bg-black
+                    text-white
+                    hover:opacity-90
+                  "
+                >
+                  Load More Repositories
+                </button>
+              </div>
+            )}
           </>
         )}
 
