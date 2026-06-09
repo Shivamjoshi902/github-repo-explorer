@@ -3,6 +3,14 @@ import cache from "../cache/githubCache.js";
 
 const CACHE_DURATION = 60 * 1000;
 
+const getGithubConfig = () => ({
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  },
+});
+
+// console.log(getGithubConfig);
+
 export const fetchUserProfile = async (username) => {
     const cacheKey = `profile-${username}`;
 
@@ -14,7 +22,8 @@ export const fetchUserProfile = async (username) => {
     }
 
     const response = await axios.get(
-        `https://api.github.com/users/${username}`
+      `https://api.github.com/users/${username}`,
+      getGithubConfig()
     );
 
     const {
@@ -56,7 +65,8 @@ export const fetchUserRepositories = async (username) => {
 
         
     const response = await axios.get(
-        `https://api.github.com/users/${username}/repos`
+      `https://api.github.com/users/${username}/repos`,
+      getGithubConfig()
     );
 
     const repos = response.data.map((repo) => ({

@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+console.log("TOKEN:", process.env.GITHUB_TOKEN);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
