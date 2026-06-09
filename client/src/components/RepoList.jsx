@@ -1,10 +1,10 @@
 import RepoCard from "./RepoCard";
 
-const RepoList = ({ repos }) => {
+const RepoList = ({ repos, totalRepos }) => {
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">
-        Repositories ({repos.length})
+      <h2 className="text-3xl font-bold">
+        Repositories ({repos.length} of {totalRepos})
       </h2>
 
       <div className="grid gap-4">

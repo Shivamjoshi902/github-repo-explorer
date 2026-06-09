@@ -129,6 +129,7 @@ function App() {
 
             <RepoList
               repos={sortedRepos.slice(0, visibleRepos)}
+              totalRepos={sortedRepos.length}
             />
 
             {visibleRepos < sortedRepos.length && (
