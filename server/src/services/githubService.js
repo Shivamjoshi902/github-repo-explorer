@@ -9,12 +9,9 @@ export const fetchUserProfile = async (username) => {
     const cachedData = getCachedData(cacheKey);
 
     if (cachedData) {
-    console.log("Profile served from cache");
 
     return cachedData;
     }
-
-    console.log(`Fetching profile for ${username} from GitHub API`);
 
     const response = await axios.get(
         `https://api.github.com/users/${username}`
@@ -53,12 +50,10 @@ export const fetchUserRepositories = async (username) => {
     const cachedData = getCachedData(cacheKey);
 
     if (cachedData) {
-    console.log("Repos served from cache");
 
     return cachedData;
     }
 
-    console.log(`Fetching Repos for ${username} from GitHub API`);
         
     const response = await axios.get(
         `https://api.github.com/users/${username}/repos`
