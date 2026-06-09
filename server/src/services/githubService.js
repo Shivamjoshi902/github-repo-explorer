@@ -9,8 +9,6 @@ const getGithubConfig = () => ({
   },
 });
 
-// console.log(getGithubConfig);
-
 export const fetchUserProfile = async (username) => {
     const cacheKey = `profile-${username}`;
 
