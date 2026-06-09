@@ -18,7 +18,7 @@ export const getUserProfile = async (req, res) => {
         });
     }
     catch (error) {
-
+        console.error(error);
         if (error.response?.status === 404) {
             return res.status(404).json({
                 success: false,
