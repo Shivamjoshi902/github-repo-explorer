@@ -3,7 +3,7 @@ import RepoCard from "./RepoCard";
 const RepoList = ({ repos, totalRepos }) => {
   return (
     <div className="mt-8">
-      <h2 className="text-3xl font-bold">
+      <h2 className="text-2xl font-bold mb-4">
         Repositories ({repos.length} of {totalRepos})
       </h2>
 
